@@ -15,15 +15,14 @@ import java.math.BigDecimal;
 public class WatcherOrderFacade {
     private static final Logger LOGGER = LoggerFactory.getLogger(WatcherOrderFacade.class);
 
-    @Before(value = "execution(* com.kodilla.patterns2.facade.api.OrderFacade.proccessOrder(..))" +
+    @Before(value = "execution(* com.kodilla.patterns2.facade.api.OrderFacade.processOrder(..))" +
             "&& args(order, userId) && target(object)")
     public void logEvent(OrderDto order, long userId, Object object) {
         LOGGER.info("Class: " + object.getClass().getName() + ", Args: userId = " + userId);
     }
 
-//            " && args(theNumber) && target(object)")
 
-    @Around("execution(* com.kodilla.patterns2.facade.api.OrderFacade.proccessOrder(..))")
+    @Around("execution(* com.kodilla.patterns2.facade.api.OrderFacade.processOrder(..))")
     public Object measureTime(final ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         Object result;
         try {
